@@ -11,18 +11,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: main
 
-      - name: Make multiple cool commits
+      - name: Set up authentication
         run: |
           git config --global user.name 'Karan-develops'
           git config --global user.email 'mrkaran2k5@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Make multiple cool commits
+        run: |
+          EMOJIS=("🔥" "🚀" "🎯" "🎉" "😎" "✨" "🛡️" "🏆" "📈")
           
           for i in {1..4}
           do
-            echo "$(date) - Keeping the streak alive! 🔥 Commit $i" >> update.txt
+            RANDOM_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
+            echo "$(date) - $RANDOM_EMOJI Keeping the streak alive! Commit $i" >> update.txt
             git add update.txt
-            git commit -m "🔥 Keeping the streak alive | Commit $i"
+            git commit -m "$RANDOM_EMOJI Keeping the streak alive | Commit $i"
             sleep 10
           done
           
