@@ -16,6 +16,7 @@ jobs:
         run: |
           git config --global user.name 'Karan-develops'
           git config --global user.email 'mrkaran2k5@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           
           for i in {1..4}
           do
