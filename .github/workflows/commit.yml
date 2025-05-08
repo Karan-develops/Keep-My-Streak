@@ -1,37 +1,37 @@
-name: Auto Commit 4 Times
+# name: Auto Commit 4 Times
 
-on:
-  schedule:
-    - cron: '0 14 * * *'  # 2 PM UTC
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '0 14 * * *'  # 2 PM UTC
+#   workflow_dispatch:
 
-jobs:
-  auto-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          ref: main
+# jobs:
+#   auto-commit:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#         with:
+#           persist-credentials: false
+#           ref: main
 
-      - name: Set up authentication
-        run: |
-          git config --global user.name 'Karan-develops'
-          git config --global user.email 'mrkaran2k5@gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+#       - name: Set up authentication
+#         run: |
+#           git config --global user.name 'Karan-develops'
+#           git config --global user.email 'mrkaran2k5@gmail.com'
+#           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
-      - name: Make multiple cool commits
-        run: |
-          EMOJIS=("🔥" "🚀" "🎯" "🎉" "😎" "✨" "🛡️" "🏆" "📈")
+#       - name: Make multiple cool commits
+#         run: |
+#           EMOJIS=("🔥" "🚀" "🎯" "🎉" "😎" "✨" "🛡️" "🏆" "📈")
           
-          for i in {1..4}
-          do
-            RANDOM_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
-            echo "$(date) - $RANDOM_EMOJI Keeping the streak alive! Commit $i" >> update.txt
-            git add update.txt
-            git commit -m "$RANDOM_EMOJI Keeping the streak alive | Commit $i"
-            sleep 10
-          done
+#           for i in {1..4}
+#           do
+#             RANDOM_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
+#             echo "$(date) - $RANDOM_EMOJI Keeping the streak alive! Commit $i" >> update.txt
+#             git add update.txt
+#             git commit -m "$RANDOM_EMOJI Keeping the streak alive | Commit $i"
+#             sleep 10
+#           done
           
-          git push
+#           git push
